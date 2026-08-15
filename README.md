@@ -11,11 +11,14 @@ RateSphere is a full-stack **store discovery and rating platform** where users c
 
 ### Demo Login Credentials
 
-| Role          | Email                       | Password   |
-| ------------- | --------------------------- | ---------- |
-| Administrator | `admin@ratesphere.dev`      | `password` |
-| Store Owner   | `rajeshwari@ratesphere.dev` | `password` |
-| Normal User   | `harsh@ratesphere.dev`      | `password` |
+
+| Role          | Email                       | Password         |
+| ------------- | --------------------------- | ---------------- |
+| Administrator | `admin@ratesphere.dev`      | `RateSphere@123` |
+| Store Owner   | `rajeshwari@ratesphere.dev` | `RateSphere@123` |
+| Normal User   | `harsh@ratesphere.dev`      | `RateSphere@123` |
+
+Use these development accounts to test the role-based features of RateSphere.
 
 ### Role Access
 
