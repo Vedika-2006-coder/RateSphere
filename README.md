@@ -9,14 +9,13 @@ RateSphere is a full-stack **store discovery and rating platform** where users c
 * **Database:** MySQL
 * **Authentication:** JWT + bcrypt
 
-### Demo Login Credentials
-
+## Demo Login Credentials
 
 | Role          | Email                       | Password         |
 | ------------- | --------------------------- | ---------------- |
-| Administrator | `admin@ratesphere.dev`      | `RateSphere@123` |
-| Store Owner   | `rajeshwari@ratesphere.dev` | `RateSphere@123` |
-| Normal User   | `harsh@ratesphere.dev`      | `RateSphere@123` |
+| Administrator | `admin@ratesphere.dev`      | `Admin@123`    |
+| Store Owner   | `rajeshwari@ratesphere.dev` | `Rajeshwari@123` |
+| Normal User   | `harsh@ratesphere.dev`      | `User@123`       |
 
 Use these development accounts to test the role-based features of RateSphere.
 
