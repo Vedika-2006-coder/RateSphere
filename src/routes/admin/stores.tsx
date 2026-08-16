@@ -1,35 +1,38 @@
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { Users } from "lucide-react";
+import { Building2, Star } from "lucide-react";
 
 import { AppShell } from "@/components/AppShell";
 import { ErrorState, LoadingStats } from "@/components/DataState";
 import { RequireRole } from "@/components/RequireRole";
-import { userService } from "@/services";
-import type { Role } from "@/services/types";
+import { storeService } from "@/services";
 import { ApiError } from "@/services/apiClient";
 
-export const Route = createFileRoute("/admin/users")({
+export const Route = createFileRoute("/admin/stores")({
   ssr: false,
   component: () => (
     <RequireRole role="administrator">
-      <AdminUsers />
+      <AdminStores />
     </RequireRole>
   ),
 });
 
-function AdminUsers() {
+function AdminStores() {
   const query = useQuery({
-    queryKey: ["admin-users"],
-    queryFn: () => userService.list({ page: 1, limit: 50 }),
+    queryKey: ["admin-stores"],
+    queryFn: () =>
+      storeService.list({
+        page: 1,
+        limit: 50,
+      }),
   });
 
-  const users = query.data?.data ?? [];
+  const stores = query.data?.data ?? [];
 
   return (
     <AppShell
-      title="Users"
-      description="View and manage RateSphere users."
+      title="Stores"
+      description="View and manage all RateSphere stores."
     >
       {query.isPending ? <LoadingStats count={1} /> : null}
 
@@ -38,7 +41,7 @@ function AdminUsers() {
           message={
             query.error instanceof ApiError
               ? query.error.message
-              : "Unable to load users."
+              : "Unable to load stores."
           }
           onRetry={() => void query.refetch()}
         />
@@ -47,13 +50,15 @@ function AdminUsers() {
       {query.data ? (
         <section className="surface-card overflow-hidden">
           <div className="flex items-center gap-3 border-b border-border p-5">
-            <Users className="size-5" />
+            <Building2 className="size-5" />
+
             <div>
               <h2 className="font-display text-lg font-semibold">
-                All Users
+                All Stores
               </h2>
+
               <p className="text-sm text-muted-foreground">
-                {query.data.meta.total} registered users
+                {query.data.meta.total} registered stores
               </p>
             </div>
           </div>
@@ -62,51 +67,60 @@ function AdminUsers() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border text-left">
-                  <th className="px-5 py-3 font-medium">Name</th>
+                  <th className="px-5 py-3 font-medium">Store Name</th>
                   <th className="px-5 py-3 font-medium">Email</th>
                   <th className="px-5 py-3 font-medium">Address</th>
-                  <th className="px-5 py-3 font-medium">Role</th>
-                  <th className="px-5 py-3 font-medium">Ratings</th>
+                  <th className="px-5 py-3 font-medium">Owner</th>
+                  <th className="px-5 py-3 font-medium">Rating</th>
+                  <th className="px-5 py-3 font-medium">Total Ratings</th>
                 </tr>
               </thead>
 
               <tbody>
-                {users.map((user) => (
+                {stores.map((store) => (
                   <tr
-                    key={user.id}
+                    key={store.id}
                     className="border-b border-border last:border-0"
                   >
                     <td className="px-5 py-4 font-medium">
-                      {user.name}
+                      {store.name}
                     </td>
 
                     <td className="px-5 py-4">
-                      {user.email}
+                      {store.email}
                     </td>
 
                     <td className="px-5 py-4 text-muted-foreground">
-                      {user.address}
+                      {store.address}
                     </td>
 
                     <td className="px-5 py-4">
-                      <RoleBadge role={user.role} />
+                      {store.owner_name ?? "No owner"}
                     </td>
 
                     <td className="px-5 py-4">
-                      {user.role === "store_owner"
-                        ? user.owner_total_ratings
-                        : "—"}
+                      <div className="flex items-center gap-2">
+                        <Star className="size-4" />
+
+                        {store.average_rating !== null
+                          ? Number(store.average_rating).toFixed(2)
+                          : "No ratings"}
+                      </div>
+                    </td>
+
+                    <td className="px-5 py-4">
+                      {store.total_ratings}
                     </td>
                   </tr>
                 ))}
 
-                {users.length === 0 ? (
+                {stores.length === 0 ? (
                   <tr>
                     <td
-                      colSpan={5}
+                      colSpan={6}
                       className="px-5 py-8 text-center text-muted-foreground"
                     >
-                      No users found.
+                      No stores found.
                     </td>
                   </tr>
                 ) : null}
@@ -116,20 +130,5 @@ function AdminUsers() {
         </section>
       ) : null}
     </AppShell>
-  );
-}
-
-function RoleBadge({ role }: { role: Role }) {
-  const label =
-    role === "administrator"
-      ? "Administrator"
-      : role === "store_owner"
-        ? "Store Owner"
-        : "Normal User";
-
-  return (
-    <span className="inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-medium">
-      {label}
-    </span>
   );
 }

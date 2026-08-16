@@ -17,8 +17,13 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as StoresRouteImport } from './routes/stores'
 import { Route as AccountPasswordRouteImport } from './routes/account.password'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminRatingsRouteImport } from './routes/admin/ratings'
+import { Route as AdminStoresRouteImport } from './routes/admin/stores'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as OwnerAnalyticsRouteImport } from './routes/owner/analytics'
 import { Route as OwnerDashboardRouteImport } from './routes/owner/dashboard'
+import { Route as OwnerRatingsRouteImport } from './routes/owner/ratings'
+import { Route as OwnerStoreRouteImport } from './routes/owner/store'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -60,14 +65,39 @@ const AdminDashboardRoute = AdminDashboardRouteImport.update({
   path: '/admin/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRatingsRoute = AdminRatingsRouteImport.update({
+  id: '/admin/ratings',
+  path: '/admin/ratings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminStoresRoute = AdminStoresRouteImport.update({
+  id: '/admin/stores',
+  path: '/admin/stores',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/admin/users',
   path: '/admin/users',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OwnerAnalyticsRoute = OwnerAnalyticsRouteImport.update({
+  id: '/owner/analytics',
+  path: '/owner/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OwnerDashboardRoute = OwnerDashboardRouteImport.update({
   id: '/owner/dashboard',
   path: '/owner/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerRatingsRoute = OwnerRatingsRouteImport.update({
+  id: '/owner/ratings',
+  path: '/owner/ratings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerStoreRoute = OwnerStoreRouteImport.update({
+  id: '/owner/store',
+  path: '/owner/store',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -80,8 +110,13 @@ export interface FileRoutesByFullPath {
   '/stores': typeof StoresRoute
   '/account/password': typeof AccountPasswordRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/ratings': typeof AdminRatingsRoute
+  '/admin/stores': typeof AdminStoresRoute
   '/admin/users': typeof AdminUsersRoute
+  '/owner/analytics': typeof OwnerAnalyticsRoute
   '/owner/dashboard': typeof OwnerDashboardRoute
+  '/owner/ratings': typeof OwnerRatingsRoute
+  '/owner/store': typeof OwnerStoreRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -92,8 +127,13 @@ export interface FileRoutesByTo {
   '/stores': typeof StoresRoute
   '/account/password': typeof AccountPasswordRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/ratings': typeof AdminRatingsRoute
+  '/admin/stores': typeof AdminStoresRoute
   '/admin/users': typeof AdminUsersRoute
+  '/owner/analytics': typeof OwnerAnalyticsRoute
   '/owner/dashboard': typeof OwnerDashboardRoute
+  '/owner/ratings': typeof OwnerRatingsRoute
+  '/owner/store': typeof OwnerStoreRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -105,8 +145,13 @@ export interface FileRoutesById {
   '/stores': typeof StoresRoute
   '/account/password': typeof AccountPasswordRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/ratings': typeof AdminRatingsRoute
+  '/admin/stores': typeof AdminStoresRoute
   '/admin/users': typeof AdminUsersRoute
+  '/owner/analytics': typeof OwnerAnalyticsRoute
   '/owner/dashboard': typeof OwnerDashboardRoute
+  '/owner/ratings': typeof OwnerRatingsRoute
+  '/owner/store': typeof OwnerStoreRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -119,8 +164,13 @@ export interface FileRouteTypes {
     | '/stores'
     | '/account/password'
     | '/admin/dashboard'
+    | '/admin/ratings'
+    | '/admin/stores'
     | '/admin/users'
+    | '/owner/analytics'
     | '/owner/dashboard'
+    | '/owner/ratings'
+    | '/owner/store'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -131,8 +181,13 @@ export interface FileRouteTypes {
     | '/stores'
     | '/account/password'
     | '/admin/dashboard'
+    | '/admin/ratings'
+    | '/admin/stores'
     | '/admin/users'
+    | '/owner/analytics'
     | '/owner/dashboard'
+    | '/owner/ratings'
+    | '/owner/store'
   id:
     | '__root__'
     | '/'
@@ -143,8 +198,13 @@ export interface FileRouteTypes {
     | '/stores'
     | '/account/password'
     | '/admin/dashboard'
+    | '/admin/ratings'
+    | '/admin/stores'
     | '/admin/users'
+    | '/owner/analytics'
     | '/owner/dashboard'
+    | '/owner/ratings'
+    | '/owner/store'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -156,8 +216,13 @@ export interface RootRouteChildren {
   StoresRoute: typeof StoresRoute
   AccountPasswordRoute: typeof AccountPasswordRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminRatingsRoute: typeof AdminRatingsRoute
+  AdminStoresRoute: typeof AdminStoresRoute
   AdminUsersRoute: typeof AdminUsersRoute
+  OwnerAnalyticsRoute: typeof OwnerAnalyticsRoute
   OwnerDashboardRoute: typeof OwnerDashboardRoute
+  OwnerRatingsRoute: typeof OwnerRatingsRoute
+  OwnerStoreRoute: typeof OwnerStoreRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -218,6 +283,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/ratings': {
+      id: '/admin/ratings'
+      path: '/admin/ratings'
+      fullPath: '/admin/ratings'
+      preLoaderRoute: typeof AdminRatingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/stores': {
+      id: '/admin/stores'
+      path: '/admin/stores'
+      fullPath: '/admin/stores'
+      preLoaderRoute: typeof AdminStoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/users': {
       id: '/admin/users'
       path: '/admin/users'
@@ -225,11 +304,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/owner/analytics': {
+      id: '/owner/analytics'
+      path: '/owner/analytics'
+      fullPath: '/owner/analytics'
+      preLoaderRoute: typeof OwnerAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/owner/dashboard': {
       id: '/owner/dashboard'
       path: '/owner/dashboard'
       fullPath: '/owner/dashboard'
       preLoaderRoute: typeof OwnerDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner/ratings': {
+      id: '/owner/ratings'
+      path: '/owner/ratings'
+      fullPath: '/owner/ratings'
+      preLoaderRoute: typeof OwnerRatingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner/store': {
+      id: '/owner/store'
+      path: '/owner/store'
+      fullPath: '/owner/store'
+      preLoaderRoute: typeof OwnerStoreRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -244,8 +344,13 @@ const rootRouteChildren: RootRouteChildren = {
   StoresRoute: StoresRoute,
   AccountPasswordRoute: AccountPasswordRoute,
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminRatingsRoute: AdminRatingsRoute,
+  AdminStoresRoute: AdminStoresRoute,
   AdminUsersRoute: AdminUsersRoute,
+  OwnerAnalyticsRoute: OwnerAnalyticsRoute,
   OwnerDashboardRoute: OwnerDashboardRoute,
+  OwnerRatingsRoute: OwnerRatingsRoute,
+  OwnerStoreRoute: OwnerStoreRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
